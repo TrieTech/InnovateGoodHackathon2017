@@ -3,11 +3,13 @@ package allen.brett.plana;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -28,12 +30,15 @@ import static android.content.ContentValues.TAG;
 public class MainActivity extends Activity {
 
     private static final int CAM_REQUEST = 1313;
+    private static final int REQUEST_TAKE_PHOTO = 1;
 
     private TextView mTextMessage;
 
     private Button btnTakePicture;
 
     private ImageView imgTakenPic;
+
+    private String currentPhotoPath;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -78,13 +83,11 @@ public class MainActivity extends Activity {
             Bitmap thumbnail = (Bitmap)data.getExtras().get("data");
             imgTakenPic.setImageBitmap(thumbnail);
 
-            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-            OutputStream outStream;
-            File file = new File(extStorageDirectory, "text.PNG");
-
-            Log.e("Information", "Creating the file...");
-            storeImage(thumbnail);
-            Log.e("Success", "File saved!");
+            try{
+                createImageFile();
+            }catch(IOException ioe){
+                ioe.printStackTrace();
+            }
 
             /*try {
                 outStream = new FileOutputStream(file);
@@ -99,6 +102,47 @@ public class MainActivity extends Activity {
         }
     }
 
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        Log.e("Current Photo Path", currentPhotoPath);
+        return image;
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                ex.printStackTrace();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.android.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
+        }
+    }
+
+    /*
     private void storeImage(Bitmap image) {
         File pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
@@ -118,7 +162,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    /** Create a File for saving an image or video */
+    *//** Create a File for saving an image or video *//*
     private  File getOutputMediaFile(){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
@@ -143,7 +187,7 @@ public class MainActivity extends Activity {
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
 
         return mediaFile;
-    }
+    }*/
 
     private class PhotoTaker implements Button.OnClickListener{
 
