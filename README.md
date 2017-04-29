@@ -2,7 +2,8 @@
 
 ## Members: Brett, Jay, Michael, James 
 
-Project Idea A
+*Project Idea A*
+
 (Pseudo Code)
 Within the healthcare field there is always excessive demand and job stability. However, given this stability and demand, there can be a shortage of staff. Being said, when someone experiences a situation where the sense of urgency is undefined, technology can be of assistance. An app where a user can enter the medical concern w/ option to perhaps take a picture, and outputs the urgency and possibility of it being treatable with/without medical personnel. As follows:
 
@@ -47,7 +48,7 @@ Call location
 Schedule Lyft/Uber
 Open address in GPS Maps
 
-Project B.
+*Project B*
 As many people choose the online shopping cart as a primary path, some do not realize that this will need 
 
 Within the healthcare field there is always excessive demand and job stability. However, given this stability and demand, there can be a shortage of staff. Being said, when someone experiences a situation where the sense of urgency is undefined, technology can be of assistance. Some feel discouraged to consult a medical staff such as an advice nurse as the demand leaves many frustrated and annoyed which is channeled towards the patients. Also the long wait times when calling in, many patients find themselves alone and feeling a burden, in turn deterring some from addressing possible medical concerns. Many waged medical staff (i.e. Nurses) answer questions by an online system provided to them by their employer instead of needed to source from their own knowledge directly. Technology in a way, has negated the importance of credentials and comprehension within education. Given this, it's arguable that jobs could be diminished through the influx of technological enhancements and it's user friendliness. The digital literacy is a problem as technology has become a crutch to the point of placing stake on people's lives within this. It's very critical to be able feel comfortable with this.
