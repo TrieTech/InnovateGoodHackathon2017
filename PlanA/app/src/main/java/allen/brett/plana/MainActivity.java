@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 
     private String currentPhotoPath;
 
-    private Bitmap thumbnail;
+    private ThumbnailRenderer thumbnailRenderer;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -70,6 +70,7 @@ public class MainActivity extends Activity {
         mTextMessage = (TextView) findViewById(R.id.message);
         btnTakePicture = (Button)findViewById(R.id.btnTakePicture);
         imgTakenPic = (ImageView)findViewById(R.id.imgSnapshot);
+        thumbnailRenderer = new ThumbnailRenderer();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -81,9 +82,9 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == CAM_REQUEST){
-            thumbnail = (Bitmap)data.getExtras().get("data");
-            imgTakenPic.setImageBitmap(thumbnail);
-            storeImage(thumbnail);
+            thumbnailRenderer.createThumbnail((Bitmap)data.getExtras().get("data"));
+            imgTakenPic.setImageBitmap(thumbnailRenderer.getThumbnail());
+            storeImage(thumbnailRenderer.getThumbnail());
 
            /* try{
                 File f = createImageFile();
@@ -162,10 +163,6 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             Log.d(TAG, "Error accessing file: " + e.getMessage());
         }
-    }
-
-    public Bitmap getThumbnail(){
-        return thumbnail;
     }
 
     //** Create a File for saving an image or video *//*
