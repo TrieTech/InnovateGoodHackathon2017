@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -82,12 +81,13 @@ public class MainActivity extends Activity {
         if(requestCode == CAM_REQUEST){
             Bitmap thumbnail = (Bitmap)data.getExtras().get("data");
             imgTakenPic.setImageBitmap(thumbnail);
+            storeImage(thumbnail);
 
-            try{
-                createImageFile();
+           /* try{
+                File f = createImageFile();
             }catch(IOException ioe){
                 ioe.printStackTrace();
-            }
+            }*/
 
             /*try {
                 outStream = new FileOutputStream(file);
@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
-        Log.e("Current Photo Path", currentPhotoPath);
+        Log.i("Current Photo Path", currentPhotoPath);
         return image;
     }
 
@@ -142,7 +142,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    /*
     private void storeImage(Bitmap image) {
         File pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
@@ -154,6 +153,7 @@ public class MainActivity extends Activity {
         try {
             FileOutputStream fos = new FileOutputStream(pictureFile);
             image.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            Log.i("File Saved", image.toString());
             fos.close();
         } catch (FileNotFoundException e) {
             Log.d(TAG, "File not found: " + e.getMessage());
@@ -162,7 +162,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    *//** Create a File for saving an image or video *//*
+    //** Create a File for saving an image or video *//*
     private  File getOutputMediaFile(){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
@@ -187,7 +187,7 @@ public class MainActivity extends Activity {
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
 
         return mediaFile;
-    }*/
+    }
 
     private class PhotoTaker implements Button.OnClickListener{
 
