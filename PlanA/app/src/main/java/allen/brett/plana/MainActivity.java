@@ -40,6 +40,8 @@ public class MainActivity extends Activity {
 
     private String currentPhotoPath;
 
+    ScheduleData sd = new ScheduleData();
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
