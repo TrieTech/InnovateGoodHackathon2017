@@ -39,6 +39,8 @@ public class MainActivity extends Activity {
 
     private String currentPhotoPath;
 
+    private Bitmap thumbnail;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -79,7 +81,7 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == CAM_REQUEST){
-            Bitmap thumbnail = (Bitmap)data.getExtras().get("data");
+            thumbnail = (Bitmap)data.getExtras().get("data");
             imgTakenPic.setImageBitmap(thumbnail);
             storeImage(thumbnail);
 
@@ -160,6 +162,10 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             Log.d(TAG, "Error accessing file: " + e.getMessage());
         }
+    }
+
+    public Bitmap getThumbnail(){
+        return thumbnail;
     }
 
     //** Create a File for saving an image or video *//*
