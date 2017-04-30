@@ -37,6 +37,7 @@
                 android:layout_marginBottom="11dp"
                 android:text="@string/picture_button" />
 
+<<<<<<< HEAD
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -52,6 +53,15 @@
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_dashboard_black_24dp" />
             </GridLayout>
+=======
+            <ImageView
+                android:id="@+id/imgSnapshot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@mipmap/ic_launcher" />
+>>>>>>> PlanA
 
         </RelativeLayout>
 

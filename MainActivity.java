@@ -20,10 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.io.OutputStream;
->>>>>>> PlanA
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -42,6 +39,8 @@ public class MainActivity extends Activity {
     private ImageView imgTakenPic;
 
     private String currentPhotoPath;
+
+    ScheduleData sd = new ScheduleData();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -85,22 +84,12 @@ public class MainActivity extends Activity {
         if(requestCode == CAM_REQUEST){
             Bitmap thumbnail = (Bitmap)data.getExtras().get("data");
             imgTakenPic.setImageBitmap(thumbnail);
-<<<<<<< HEAD
-            storeImage(thumbnail);
-
-           /* try{
-                File f = createImageFile();
-            }catch(IOException ioe){
-                ioe.printStackTrace();
-            }*/
-=======
 
             try{
                 createImageFile();
             }catch(IOException ioe){
                 ioe.printStackTrace();
             }
->>>>>>> PlanA
 
             /*try {
                 outStream = new FileOutputStream(file);
@@ -128,11 +117,7 @@ public class MainActivity extends Activity {
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
-<<<<<<< HEAD
-        Log.i("Current Photo Path", currentPhotoPath);
-=======
         Log.e("Current Photo Path", currentPhotoPath);
->>>>>>> PlanA
         return image;
     }
 
@@ -159,10 +144,7 @@ public class MainActivity extends Activity {
         }
     }
 
-<<<<<<< HEAD
-=======
     /*
->>>>>>> PlanA
     private void storeImage(Bitmap image) {
         File pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
@@ -174,10 +156,6 @@ public class MainActivity extends Activity {
         try {
             FileOutputStream fos = new FileOutputStream(pictureFile);
             image.compress(Bitmap.CompressFormat.PNG, 100, fos);
-<<<<<<< HEAD
-            Log.i("File Saved", image.toString());
-=======
->>>>>>> PlanA
             fos.close();
         } catch (FileNotFoundException e) {
             Log.d(TAG, "File not found: " + e.getMessage());
@@ -186,11 +164,7 @@ public class MainActivity extends Activity {
         }
     }
 
-<<<<<<< HEAD
-    //** Create a File for saving an image or video *//*
-=======
     *//** Create a File for saving an image or video *//*
->>>>>>> PlanA
     private  File getOutputMediaFile(){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
@@ -215,11 +189,7 @@ public class MainActivity extends Activity {
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
 
         return mediaFile;
-<<<<<<< HEAD
-    }
-=======
     }*/
->>>>>>> PlanA
 
     private class PhotoTaker implements Button.OnClickListener{
 
